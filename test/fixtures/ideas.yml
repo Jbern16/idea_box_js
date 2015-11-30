@@ -3,9 +3,9 @@
 one:
   title: MyString
   body: MyString
-  quality: MyString
+  quality: 1
 
 two:
   title: MyString
   body: MyString
-  quality: MyString
+  quality: 1
