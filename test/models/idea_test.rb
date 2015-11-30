@@ -18,7 +18,7 @@ class IdeaTest < ActiveSupport::TestCase
   end
 
   test "it can change quality to genius" do
-    idea = Idea.create(quality: 1)
+    idea = Idea.create(quality: 2)
 
     assert_equal nil, idea.title
     assert_equal nil, idea.body
