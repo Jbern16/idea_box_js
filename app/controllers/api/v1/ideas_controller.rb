@@ -4,4 +4,22 @@ class Api::V1::IdeasController < ApplicationController
   def index
     respond_with Idea.all
   end
+
+  def create
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+
+  end
+
+  private
+
+  def idea_params
+
+  end
 end
