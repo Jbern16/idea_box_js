@@ -1,7 +1,6 @@
 'use strict'
 
 $(document).ready( () => {
-  // newIdea()
   $.getJSON('/api/v1/ideas')
     .then(enumIdeas)
   	.fail((data) => { alert('Something Went Wrong!') })
@@ -9,12 +8,14 @@ $(document).ready( () => {
 })
 
 var renderIdeas = (idea) => {
-  $('#ideas').append(
-    "<h3>"
-    + idea.title
-    + "</h3><p>"
-    + idea.body
+  $('#ideas').prepend(
+    "<h3 class='well'>"
+    + "Title: " + idea.title
+    + "</h3><p class='well'>"
+    + "Body: " + idea.body
     + "</p>"
+    + "<button type='button' class='btn btn-danger'id='delete-idea'>Delete</button>"
+    + "<hr>"
   )
 }
 
