@@ -1,7 +1,25 @@
+'use strict'
+
 $(document).ready( () => {
-  $('h1').remove()
   $.getJSON('/api/v1/ideas')
-    .then((data) => { console.log('It Worked') })
-  	.fail((data) => { console.log('It Failed') })
-    .always((data) => { console.log('Something Happened') })
+  .then(enumIdeas)
+	.fail((data) => { console.log('It Failed') })
+  .always((data) => { console.log('Something Happened') })
 })
+
+var renderIdeas = (idea) => {
+  $('#ideas').append(
+    "<h3>"
+    + idea.title
+    + "</h3><p>"
+    + idea.body
+    + "</p>"
+  )
+}
+
+var enumIdeas = (data) => {
+    let ideas = data
+    $.each (ideas, (index, idea) => {
+    renderIdeas(idea)
+  })
+}
