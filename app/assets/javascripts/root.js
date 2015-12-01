@@ -3,7 +3,7 @@
 $(document).ready( () => {
   $.getJSON('/api/v1/ideas')
   .then(enumIdeas)
-	.fail((data) => { console.log('It Failed') })
+	.fail((data) => { alert('Something Went Wrong!') })
   .always((data) => { console.log('Something Happened') })
 })
 
