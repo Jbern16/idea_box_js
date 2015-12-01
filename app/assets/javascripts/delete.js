@@ -11,8 +11,8 @@ var deleteIdea = () => {
         $idea.parent().remove()
       },
       error: () => {
-        $idea.remove()
-        console.log("That idea was already deleted")
+        $idea.parent().remove()
+        alert("Something went HORRIBLY wrong!")
       }
     })
   })
