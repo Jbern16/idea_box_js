@@ -1,13 +1,6 @@
 'use strict'
 
-// $(document).ready( () => {
-//   $.postJSON('/api/v1/ideas')
-//     .then((data) => { console.log("Something got Created") })
-//   	.fail((data) => { alert('Something Went Wrong!') })
-//     .always((data) => { console.log('Something Happened') })
-// })
-
-function createIdea(event) {
+var createIdea = (event) => {
   event.preventDefault();
   postIdeaInfo();
 }
@@ -21,8 +14,8 @@ var ideaInfo = () => {
   };
 }
 
-var postIdeaInfo = () => {
-  $.post("/api/v1/ideas", ideaInfo(), function(data) {
+var postIdea = () => {
+  $.post("/api/v1/ideas", ideaInfo(), (data) => {
     $("#ideas").prepend(data)
     clearField()
   })
