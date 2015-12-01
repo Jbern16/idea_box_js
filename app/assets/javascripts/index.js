@@ -2,9 +2,9 @@
 
 $(document).ready( () => {
   $.getJSON('/api/v1/ideas')
-  .then(enumIdeas)
-	.fail((data) => { alert('Something Went Wrong!') })
-  .always((data) => { console.log('Something Happened') })
+    .then(enumIdeas)
+  	.fail((data) => { alert('Something Went Wrong!') })
+    .always((data) => { console.log('Something Happened') })
 })
 
 var renderIdeas = (idea) => {
