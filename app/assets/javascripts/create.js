@@ -1,44 +1,7 @@
-<<<<<<< HEAD
 $( document ).ready( () => {
   newIdea();
 });
 
-var newIdea = () => {
-  $('#submit-button').click( () => {
-
-    $.ajax({
-       method: "POST",
-       url: "api/v1/ideas",
-       data: { title: getTitle(),
-               body: getBody()
-             },
-       success: () => {
-         clearOut();
-         loadIdeas()
-         clearForm()
-       },
-       error: () => {
-         displayError()
-       }
-    });
-  });
-}
-
-var getTitle = () => {
-  return $('#title-field').val()
-}
-
-var getBody = () => {
-  return $('#body-field').val()
-}
-
-var clearForm = () => {
-  $('#title-field').val("")
-  $('#body-field').val("")
-}
-
-var displayError = () => {
-=======
 var newIdea = () => {
   $('#submit-idea').click( () => {
 
@@ -50,7 +13,7 @@ var newIdea = () => {
                body: ideaBody()
              },
        success: () => {
-         loadIdeas()
+         renderIdeas()
          clearForm()
        },
        error: () => {
@@ -74,6 +37,5 @@ var clearForm = () => {
 }
 
 var alertError = () => {
->>>>>>> create-stuff
   alert("negative ghost rider")
 }

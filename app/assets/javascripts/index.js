@@ -1,7 +1,7 @@
 'use strict'
 
 $(document).ready( () => {
-  newIdea()
+  // newIdea()
   $.getJSON('/api/v1/ideas')
     .then(enumIdeas)
   	.fail((data) => { alert('Something Went Wrong!') })
@@ -30,8 +30,4 @@ var loadIdeas = () => {
     .then(enumIdeas)
   	.fail((data) => { alert('Something Went Wrong!') })
     .always((data) => { console.log('Something Happened') })
-}
-
-var clearOut = () => {
-   $('#create-ideas').children().remove()
 }
