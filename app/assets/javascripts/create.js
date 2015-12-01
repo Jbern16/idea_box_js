@@ -1,6 +1,7 @@
 'use strict'
 
 var createIdea = (event) => {
+  debugger
   event.preventDefault();
   postIdeaInfo();
 }
@@ -11,11 +12,11 @@ var ideaInfo = () => {
       title: $("#title-field").val(),
       body:  $("#body-field").val()
     }
-  };
+  }
 }
 
-var postIdea = () => {
-  $.post("/api/v1/ideas", ideaInfo(), (data) => {
+var postIdeaInfo = () => {
+  $.post("/api/v1/ideas", ideaInfo, (data) => {
     $("#ideas").prepend(data)
     clearField()
   })
