@@ -1,6 +1,7 @@
 'use strict'
 
 $(document).ready( () => {
+  newIdea()
   $.getJSON('/api/v1/ideas')
     .then(enumIdeas)
   	.fail((data) => { alert('Something Went Wrong!') })
