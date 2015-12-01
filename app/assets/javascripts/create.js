@@ -1,28 +1,41 @@
-'use strict'
+$( document ).ready( () => {
+  newIdea();
+});
 
-var createIdea = (event) => {
-  debugger
-  event.preventDefault();
-  postIdeaInfo();
+var newIdea = () => {
+  $('#submit-button').click( () => {
+
+    $.ajax({
+       method: "POST",
+       url: "api/v1/ideas",
+       data: { title: getTitle(),
+               body: getBody()
+             },
+       success: () => {
+         clearOut();
+         loadIdeas()
+         clearForm()
+       },
+       error: () => {
+         displayError()
+       }
+    });
+  });
 }
 
-var ideaInfo = () => {
-  return {
-    idea: {
-      title: $("#title-field").val(),
-      body:  $("#body-field").val()
-    }
-  }
+var getTitle = () => {
+  return $('#title-field').val()
 }
 
-var postIdeaInfo = () => {
-  $.post("/api/v1/ideas", ideaInfo, (data) => {
-    $("#ideas").prepend(data)
-    clearField()
-  })
+var getBody = () => {
+  return $('#body-field').val()
 }
 
-var clearField = () => {
-   $("#title-field").val("")
-   $("#body-field").val("")
+var clearForm = () => {
+  $('#title-field').val("")
+  $('#body-field').val("")
+}
+
+var displayError = () => {
+  alert("negative ghost rider")
 }

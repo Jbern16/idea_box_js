@@ -1,10 +1,7 @@
 'use strict'
 
 $(document).ready( () => {
-  $.getJSON('/api/v1/ideas')
-    .then(enumIdeas)
-  	.fail((data) => { alert('Something Went Wrong!') })
-    .always((data) => { console.log('Something Happened') })
+  loadIdeas
 })
 
 var renderIdeas = (idea) => {
@@ -22,4 +19,15 @@ var enumIdeas = (data) => {
     $.each (ideas, (index, idea) => {
     renderIdeas(idea)
   })
+}
+
+var loadIdeas = () => {
+  $.getJSON('/api/v1/ideas')
+    .then(enumIdeas)
+  	.fail((data) => { alert('Something Went Wrong!') })
+    .always((data) => { console.log('Something Happened') })
+}
+
+var clearOut = () => {
+   $('#create-ideas').children().remove()
 }
