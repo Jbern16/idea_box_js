@@ -10,7 +10,7 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   def update
-
+    respond_with Idea.find(params[:id]).update(idea_params)
   end
 
   def destroy
@@ -20,6 +20,6 @@ class Api::V1::IdeasController < ApplicationController
   private
 
   def idea_params
-    params.permit(:title, :body)
+    params.permit(:title, :body, :quality)
   end
 end
