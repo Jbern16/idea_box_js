@@ -28,16 +28,24 @@ var renderIdeas = (idea) => {
   )
 }
 
-var enumIdeas = (data) => {
-    let ideas = data
-    $.each (ideas, (index, idea) => {
-    renderIdeas(idea)
+// var enumIdeas = (data) => {
+//     let ideas = data
+//     $.each (ideas, (index, idea) => {
+//     renderIdeas(idea)
+//   })
+// }
+
+var enumIdeas = () => {
+  $.getJSON( "/api/v1/ideas", function( data ) {
+      data.forEach( (stuff) => {
+      renderIdeas(stuff)
+    })
   })
 }
 
 var loadIdeas = () => {
   $.getJSON('/api/v1/ideas')
-    .then(enumIdeas)
+    .then(enumIdeas())
   	.fail((data) => { alert('Something Went Wrong!') })
     .always((data) => { console.log('Something Happened') })
 }

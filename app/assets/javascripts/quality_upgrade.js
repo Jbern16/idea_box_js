@@ -5,7 +5,6 @@ var upgradeQuality = () => {
     let $idea           = $(event.toElement)
     let qualityUpdateId = $idea.attr('idea-id')
     let qualityName     = $idea.attr('quality-value')
-    let qualityEnumNum  = 'Genius'
     $.ajax({
       type: 'PATCH',
       url: '/api/v1/ideas/' + qualityUpdateId,
@@ -13,7 +12,7 @@ var upgradeQuality = () => {
               quality: thumbsUp(
                 qualityArray,
                 qualityName,
-                findQualityIndex(qualityArray, qualityName)
+                findIndex(qualityArray, qualityName)
               )
             },
       success: () => {
@@ -41,7 +40,7 @@ var thumbsUp = (qualities, qualityName, qualityIndex) => {
   }
 }
 
-var findQualityIndex = (array, findQual) => {
+var findIndex = (array, findQual) => {
   let j = 0
     array.forEach( (quality, index) => {
       if (findQual === quality) {

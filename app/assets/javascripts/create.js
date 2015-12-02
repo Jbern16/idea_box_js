@@ -14,9 +14,9 @@ var newIdea = () => {
                 title: ideaTitle(),
                 body: ideaBody()
              },
-       success: () => {
+       success: (data) => {
          clearIdeas()
-         renderIdeas()
+         renderIdeas(data)
          clearForm()
        },
        error: () => {
@@ -27,7 +27,6 @@ var newIdea = () => {
 }
 
 var ideaTitle = () => {
-  // debugger
   return $('#title-field').val()
 }
 
