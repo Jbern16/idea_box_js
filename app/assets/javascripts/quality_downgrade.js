@@ -5,7 +5,6 @@ var downgradeQuality = () => {
     let $idea           = $(event.toElement)
     let qualityUpdateId = $idea.attr('idea-id')
     let qualityName     = $idea.attr('quality-value')
-    let qualityEnumNum  = 'Genius'
     $.ajax({
       type: 'PATCH',
       url: '/api/v1/ideas/' + qualityUpdateId,
@@ -13,7 +12,7 @@ var downgradeQuality = () => {
               quality: thumbsDown(
                 qualityArray,
                 qualityName,
-                findQualityIndex(qualityArray, qualityName)
+                findIndex(qualityArray, qualityName)
               )
             },
       success: () => {
