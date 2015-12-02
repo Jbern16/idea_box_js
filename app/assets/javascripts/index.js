@@ -28,17 +28,10 @@ var renderIdeas = (idea) => {
   )
 }
 
-// var enumIdeas = (data) => {
-//     let ideas = data
-//     $.each (ideas, (index, idea) => {
-//     renderIdeas(idea)
-//   })
-// }
-
 var enumIdeas = () => {
   $.getJSON( "/api/v1/ideas", function( data ) {
       data.forEach( (stuff) => {
-      renderIdeas(stuff)
+        renderIdeas(stuff)
     })
   })
 }

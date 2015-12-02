@@ -16,7 +16,7 @@ var newIdea = () => {
              },
        success: (data) => {
          clearIdeas()
-         renderIdeas(data)
+         loadIdeas()
          clearForm()
        },
        error: () => {
