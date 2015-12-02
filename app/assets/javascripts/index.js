@@ -11,14 +11,15 @@ $(document).ready( () => {
 var renderIdeas = (idea) => {
   $('#ideas').prepend(
     `<div>`
-    + "<h3 class='well'>"
+    + "<h3 class='well' id='title'>"
     + `Title: ${idea.title}`
-    + `</h3><p class='well'>`
+    + `</h3><p class='well' id ='title'>`
     + `Body: ${truncate(idea.body)}`
     + `</p>`
     + `<p>`
     + `Quality: ${idea.quality}`
     + `</p>`
+    + `<button type='button' class='btn btn-danger'id='edit-idea' data-id=${idea.id}>Edit</button>`
     + `<button type='button' class='btn btn-danger'id='delete-idea' data-id=${idea.id}>Delete</button>`
     + `<button type='button' class='btn btn-danger'id='upgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}>Thumbs Up</button>`
     + `<button type='button' class='btn btn-danger'id='downgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}>Thumbs Down</button>`
