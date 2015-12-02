@@ -46,3 +46,7 @@ var truncate = (string) => {
     return string;
   }
 }
+
+var clearIdeas = () => {
+  $('#ideas').children().remove()
+};

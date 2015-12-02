@@ -7,7 +7,6 @@ var updateQuality = () => {
   let qualityUpdateId = $idea.attr('idea-id')
   let qualityName     = $idea.attr('quality-value')
   let qualityEnumNum  = 'Genius'
-
     $.ajax({
       type: 'PATCH',
       url: '/api/v1/ideas/' + qualityUpdateId,
@@ -20,9 +19,12 @@ var updateQuality = () => {
               )
             },
       success: () => {
-        fetchIdea(qualityUpdateId)
+        // fetchIdea(qualityUpdateId)
+        clearIdeas()
+        loadIdeas()
       },
       error: () => {
+        clearIdeas()
         loadIdeas()
         alert("Something went HORRIBLY wrong!")
       }
@@ -44,7 +46,6 @@ var thumbsUp = (qualities, qualityName, functionPass) => {
   }
 }
 
-
 var findQualityIndex = (array, findQual) => {
   let j = 0
     array.forEach( (quality, index) => {
@@ -54,20 +55,6 @@ var findQualityIndex = (array, findQual) => {
   });
   return j
 }
-
-// var thumbsDown = (qualities, qualityName) => {
-//   console.log(qualityName)
-//   let i = 0
-//   if (qualityName === 'Genius') {
-//     alert("Cannot upgrade further!")
-//   } else {
-//     qualityArray[i++]
-//   }
-// }
-
-// var qualNum = (array, someFunc) => {
-//   array[someFunc]
-// }
 
 var fetchIdea = (updateId) => {
   $.getJSON('/api/v1/ideas/' + updateId)
