@@ -2,6 +2,7 @@
 
 var upgradeQuality = () => {
   $('#ideas').delegate('#upgrade-quality', 'click', (event) => {
+    event.stopPropagation()
     let $idea           = $(event.toElement)
     let qualityUpdateId = $idea.attr('idea-id')
     let qualityName     = $idea.attr('quality-value')
@@ -18,6 +19,7 @@ var upgradeQuality = () => {
       success: () => {
         clearIdeas()
         loadIdeas()
+        // fetchIdea(qualityUpdateId)
       },
       error: () => {
         clearIdeas()
@@ -48,8 +50,4 @@ var findIndex = (array, findQual) => {
       }
   });
   return j
-}
-
-var fetchIdea = (updateId) => {
-  $.getJSON('/api/v1/ideas/' + updateId)
 }

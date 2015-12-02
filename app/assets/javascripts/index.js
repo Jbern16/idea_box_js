@@ -9,7 +9,6 @@ $(document).ready( () => {
 })
 
 var renderIdeas = (idea) => {
-  // debugger
   $('#ideas').prepend(
     `<div>`
     + "<h3 class='well' id='title'>"
@@ -32,13 +31,12 @@ var renderIdeas = (idea) => {
 var enumIdeas = () => {
   $.getJSON( "/api/v1/ideas", function( data ) {
       data.sort(function(a, b) {return a.id - b.id}).forEach( (idea) => {
-        console.log(idea.id)
         renderIdeas(idea)
     })
   })
 }
 
-var loadIdeas = () => {
+var loadIdeas = (event) => {
   $.getJSON('/api/v1/ideas')
     .then(enumIdeas())
   	.fail((data) => { alert('Something Went Wrong!') })
