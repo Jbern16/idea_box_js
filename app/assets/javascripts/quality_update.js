@@ -11,7 +11,6 @@ var updateQuality = () => {
       type: 'PATCH',
       url: '/api/v1/ideas/' + qualityUpdateId,
       data: {
-              // quality: 'Swill'
               quality: thumbsUp(
                 qualityArray,
                 qualityName,
@@ -19,7 +18,6 @@ var updateQuality = () => {
               )
             },
       success: () => {
-        // fetchIdea(qualityUpdateId)
         clearIdeas()
         loadIdeas()
       },
