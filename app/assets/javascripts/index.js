@@ -5,6 +5,7 @@ $(document).ready( () => {
   deleteIdea()
   upgradeQuality()
   downgradeQuality()
+  filterElements()
 })
 
 var renderIdeas = (idea) => {
