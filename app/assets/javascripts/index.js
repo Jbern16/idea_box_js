@@ -3,18 +3,22 @@
 $(document).ready( () => {
   loadIdeas()
   deleteIdea()
+  updateQuality()
 })
 
 var renderIdeas = (idea) => {
   $('#ideas').prepend(
-
     `<div>`
     + "<h3 class='well'>"
     + `Title: ${idea.title}`
     + `</h3><p class='well'>`
     + `Body: ${truncate(idea.body)}`
     + `</p>`
+    + `<p>`
+    + `Quality: ${idea.quality}`
+    + `</p>`
     + `<button type='button' class='btn btn-danger'id='delete-idea' data-id=${idea.id}>Delete</button>`
+    + `<button type='button' class='btn btn-danger'id='update-quality' quality-value=${idea.quality} idea-id=${idea.id}>Thumbs Up</button>`
     + `<hr>`
     + `</div>`
   )
