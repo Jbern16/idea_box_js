@@ -13,7 +13,7 @@ var renderIdeas = (idea) => {
     `<div>`
     + "<h3 class='well' id='title'>"
     + `Title: ${idea.title}`
-    + `</h3><p class='well' id ='title'>`
+    + `</h3><p class='well' id ='body'>`
     + `Body: ${truncate(idea.body)}`
     + `</p>`
     + `<p>`
@@ -43,7 +43,8 @@ var loadIdeas = () => {
 }
 
 var truncate = (string) => {
-  if(string.length > 100){
+  if (string === null) {
+  } else if(string.length > 100) {
     return $.trim(string).substring(0, 100)
            .split(" ").slice(0, -1).join(" ") + "...";
   } else {
