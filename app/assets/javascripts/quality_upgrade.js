@@ -1,12 +1,11 @@
 'use strict'
 
-var updateQuality = () => {
-  $('#ideas').delegate('#update-quality', 'click', (event) => {
-
-  let $idea           = $(event.toElement)
-  let qualityUpdateId = $idea.attr('idea-id')
-  let qualityName     = $idea.attr('quality-value')
-  let qualityEnumNum  = 'Genius'
+var upgradeQuality = () => {
+  $('#ideas').delegate('#upgrade-quality', 'click', (event) => {
+    let $idea           = $(event.toElement)
+    let qualityUpdateId = $idea.attr('idea-id')
+    let qualityName     = $idea.attr('quality-value')
+    let qualityEnumNum  = 'Genius'
     $.ajax({
       type: 'PATCH',
       url: '/api/v1/ideas/' + qualityUpdateId,
@@ -32,10 +31,8 @@ var updateQuality = () => {
 
 var qualityArray = ['Swill', 'Plausible', 'Genius']
 
-var thumbsUp = (qualities, qualityName, functionPass) => {
-  let k = 0
-  let i = functionPass
-
+var thumbsUp = (qualities, qualityName, qualityIndex) => {
+  let i = qualityIndex
   if (qualityName === 'Genius') {
     alert("Cannot upgrade further!")
   } else {

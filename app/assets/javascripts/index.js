@@ -3,7 +3,8 @@
 $(document).ready( () => {
   loadIdeas()
   deleteIdea()
-  updateQuality()
+  upgradeQuality()
+  downgradeQuality()
 })
 
 var renderIdeas = (idea) => {
@@ -18,7 +19,8 @@ var renderIdeas = (idea) => {
     + `Quality: ${idea.quality}`
     + `</p>`
     + `<button type='button' class='btn btn-danger'id='delete-idea' data-id=${idea.id}>Delete</button>`
-    + `<button type='button' class='btn btn-danger'id='update-quality' quality-value=${idea.quality} idea-id=${idea.id}>Thumbs Up</button>`
+    + `<button type='button' class='btn btn-danger'id='upgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}>Thumbs Up</button>`
+    + `<button type='button' class='btn btn-danger'id='downgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}>Thumbs Down</button>`
     + `<hr>`
     + `</div>`
   )
