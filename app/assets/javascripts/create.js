@@ -1,19 +1,22 @@
+'use strict'
+
 $( document ).ready( () => {
-  newIdea();
-});
+  newIdea()
+})
 
 var newIdea = () => {
-  $('#submit-idea').click( () => {
-
+  $('#submit-idea').click( (event) => {
+    event.preventDefault()
     $.ajax({
        method: "POST",
        url: "api/v1/ideas",
        data: {
-               title: ideaTitle(),
-               body: ideaBody()
+                title: ideaTitle(),
+                body: ideaBody()
              },
-       success: () => {
-         renderIdeas()
+       success: (data) => {
+         clearIdeas()
+         renderIdeas(data)
          clearForm()
        },
        error: () => {
