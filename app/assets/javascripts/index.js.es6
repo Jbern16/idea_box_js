@@ -10,6 +10,8 @@ $(document).ready( () => {
   enumQuality()
 })
 
+//
+
 var renderIdeas = (idea) => {
   $('#ideas').prepend(
     `<div id='idea'>`
