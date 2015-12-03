@@ -10860,320 +10860,311 @@ return jQuery;
   }
 
 })( jQuery );
-'use strict'
+'use strict';
 
-$( document ).ready( () => {
-  newIdea()
-})
+$(document).ready(function () {
+  newIdea();
+});
 
-var newIdea = () => {
-  $('#submit-idea').click( (event) => {
-    event.preventDefault()
+var newIdea = function newIdea() {
+  $('#submit-idea').click(function (event) {
+    event.preventDefault();
     $.ajax({
-       method: "POST",
-       url: "api/v1/ideas",
-       data: {
-                title: ideaTitle(),
-                body: ideaBody()
-             },
-       success: (data) => {
-         clearIdeas()
-         loadIdeas()
-         clearForm()
-       },
-       error: () => {
-         alertError()
-       }
-    })
-  })
-}
+      method: "POST",
+      url: "api/v1/ideas",
+      data: {
+        title: ideaTitle(),
+        body: ideaBody()
+      },
+      success: function success(data) {
+        clearIdeas();
+        loadIdeas();
+        clearForm();
+      },
+      error: function error() {
+        alertError();
+      }
+    });
+  });
+};
 
-var ideaTitle = () => {
-  return $('#title-field').val()
-}
+var ideaTitle = function ideaTitle() {
+  return $('#title-field').val();
+};
 
-var ideaBody = () => {
-  return $('#body-field').val()
-}
+var ideaBody = function ideaBody() {
+  return $('#body-field').val();
+};
 
-var clearForm = () => {
-  $('#title-field').val("")
-  $('#body-field').val("")
-}
+var clearForm = function clearForm() {
+  $('#title-field').val("");
+  $('#body-field').val("");
+};
 
-var alertError = () => {
-  alert("negative ghost rider")
-}
-;
-'use strict'
+var alertError = function alertError() {
+  alert("negative ghost rider");
+};
+'use strict';
 
-var deleteIdea = () => {
-  $('#ideas').delegate('#delete-idea', 'click', (event) => {
+var deleteIdea = function deleteIdea() {
+  $('#ideas').delegate('#delete-idea', 'click', function (event) {
 
-    let $idea = $(event.toElement)
+    var $idea = $(event.toElement);
     $.ajax({
       type: 'DELETE',
       url: '/api/v1/ideas/' + $idea.attr('idea-id'),
-      success: () => {
-        $idea.parent().remove()
+      success: function success() {
+        $idea.parent().remove();
       },
-      error: () => {
-        $idea.parent().remove()
-        alert("Something went HORRIBLY wrong!")
-      }
-    })
-  })
-}
-;
-var editTitle = () => {
-  $('#ideas').one('click', '#title', () => {
-    console.log('editTitle')
-    var doIt = event
-    $(this).attr('contenteditable', 'true')
-    .focus()
-    .keypress( function() {
-        if (event.which === 13) {
-          updateTitle(doIt)
-        }
-      })
-  })
-}
-
-var editBody = () => {
-  $('#ideas').one('click', '#body', () => {
-    console.log('editBody')
-    var doIt = event
-    $(this).attr('contenteditable', 'true')
-    .focus()
-    .keypress( function() {
-        if (event.which === 13) {
-          updateBody(doIt)
-        }
-      })
-  })
-}
-
-var updateTitle = (event) => {
-  console.log("wow")
-  var $idea = $(event.toElement)
-  var $title = $idea.text()
-  $.ajax({
-      type: 'PATCH',
-      url: '/api/v1/ideas/' + $idea.attr('idea-id'),
-      data: { title: $title },
-      success: function(){
-        console.log("Success")
-        clearIdeas()
-        loadIdeas()
-      },
-      error: function(err){
-        console.log("Failed!")
-        clearIdeas()
-        loadIdeas()
+      error: function error() {
+        $idea.parent().remove();
+        alert("Something went HORRIBLY wrong!");
       }
     });
-}
+  });
+};
+'use strict';
 
-var updateBody = (event) => {
-  console.log("wow")
-  var $idea = $(event.toElement)
-  var $body = $idea.text()
-  $.ajax({
-      type: 'PATCH',
-      url: '/api/v1/ideas/' + $idea.attr('idea-id'),
-      data: { body: $body },
-      success: function(){
-        console.log("Success")
-        clearIdeas()
-        loadIdeas()
-      },
-      error: function(err){
-        console.log("Failed!")
-        clearIdeas()
-        loadIdeas()
+$(document).ready(function () {
+  editTitle();
+  editBody();
+});
+
+var editTitle = function editTitle() {
+  $('#ideas').on('click', '#title', function () {
+    console.log('editTitle');
+    var doIt = event;
+    $(event.toElement).attr('contenteditable', 'true').focus().keypress(function () {
+      if (event.which === 13) {
+        console.log('keypressed');
+        updateTitle(doIt);
       }
     });
-}
-;
-'use strict'
+  });
+};
 
-$(document).ready( () => {
-  loadIdeas()
-  deleteIdea()
-  upgradeQuality()
-  downgradeQuality()
-  editTitle()
-  editBody()
-  filterElements()
-})
+var editBody = function editBody() {
+  $('#ideas').on('click', '#body', function () {
+    console.log('editBody');
+    var doIt = event;
+    $(event.toElement).attr('contenteditable', 'true').focus().keypress(function () {
+      if (event.which === 13) {
+        console.log('keypressed');
+        updateBody(doIt);
+      }
+    });
+  });
+};
 
-var renderIdeas = (idea) => {
-  $('#ideas').prepend(
-    `<div id='idea'>`
-    + `<h3 contenteditable='true' class='well idea-title' id='title' idea-id='${idea.id}' tile=${idea.title}>`
-    + `${idea.title}`
-    + `</h3><p contenteditable='true' class='well' id='body' idea-id=${idea.id} >`
-    + `${truncate(idea.body)}`
-    + `</p>`
-    + `<p class='well'>`
-    + `Quality: ${idea.quality}`
-    + `</p>`
-    + `<span class="glyphicon glyphicon-trash" aria-hidden="true" id='delete-idea' idea-id=${idea.id}></span>`
-    + `<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" id='upgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}></span>`
-    + `<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" id='downgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}></span>`
-    + `<hr>`
-    + `</div>`
-  )
-}
+var updateTitle = function updateTitle(event) {
+  event.preventDefault();
+  console.log("wow");
+  var $idea = $(event.toElement);
+  var $title = $idea.text();
+  $.ajax({
+    type: 'PATCH',
+    url: '/api/v1/ideas/' + $idea.attr('idea-id'),
+    data: { title: $title },
+    success: function success() {
+      console.log("Success");
+      clearIdeas();
+      loadIdeas();
+    },
+    error: function error(err) {
+      console.log("Failed!");
+      clearIdeas();
+      loadIdeas();
+    }
+  });
+};
 
-var enumIdeas = () => {
-  $.getJSON( "/api/v1/ideas", function( data ) {
-      data.sort(function(a, b) {return a.id - b.id}).forEach( (idea) => {
-        renderIdeas(idea)
-    })
-  })
-}
+var updateBody = function updateBody(event) {
+  event.preventDefault();
+  console.log("wow");
+  var $idea = $(event.toElement);
+  var $body = $idea.text();
+  $.ajax({
+    type: 'PATCH',
+    url: '/api/v1/ideas/' + $idea.attr('idea-id'),
+    data: { body: $body },
+    success: function success() {
+      console.log("Success");
+      clearIdeas();
+      loadIdeas();
+    },
+    error: function error(err) {
+      console.log("Failed!");
+      clearIdeas();
+      loadIdeas();
+    }
+  });
+};
+'use strict';
 
-// var enumQuality = () => {
-//   $(#quality-sort).on('click')
-//   $.getJSON( "/api/v1/ideas", function( data ) {
-//       data.sort(function(a, b) {return a.quality - b.quality}).forEach( (idea) => {
-//         renderIdeas(idea)
-//     })
-//   })
-// }
+$(document).ready(function () {
+  loadIdeas();
+  deleteIdea();
+  clearIdeas();
+  upgradeQuality();
+  downgradeQuality();
+  filterElements();
+  enumQuality();
+});
 
-var loadIdeas = (event) => {
-  $.getJSON('/api/v1/ideas')
-    .then(enumIdeas())
-  	.fail((data) => {
-      alert('Something Went Wrong!') })
-    .always((data) => { console.log('Something Happened') })
-}
+var renderIdeas = function renderIdeas(idea) {
+  $('#ideas').prepend('<div id=\'idea\'>' + ('<h3 contenteditable=\'true\' class=\'well idea-title\' id=\'title\' idea-id=\'' + idea.id + '\' tile=' + idea.title + '>') + ('' + idea.title) + ('</h3><p contenteditable=\'true\' class=\'well\' id=\'body\' idea-id=' + idea.id + ' >') + ('' + truncate(idea.body)) + '</p>' + '<p class=\'well\'>' + ('Quality: ' + idea.quality) + '</p>' + ('<span class="glyphicon glyphicon-trash" aria-hidden="true" id=\'delete-idea\' idea-id=' + idea.id + '></span>') + ('<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" id=\'upgrade-quality\' quality-value=' + idea.quality + ' idea-id=' + idea.id + '></span>') + ('<span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" id=\'downgrade-quality\' quality-value=' + idea.quality + ' idea-id=' + idea.id + '></span>') + '<hr>' + '</div>');
+};
 
-var truncate = (string) => {
-  if (string === null) {
-  } else if(string.length > 100) {
-    return $.trim(string).substring(0, 100)
-           .split(" ").slice(0, -1).join(" ") + "...";
+var enumIdeas = function enumIdeas() {
+  $.getJSON("/api/v1/ideas", function (data) {
+    data.sort(function (a, b) {
+      return a.id - b.id;
+    }).forEach(function (idea) {
+      renderIdeas(idea);
+    });
+  });
+};
+
+var sorterFlag = true;
+
+var enumQuality = function enumQuality() {
+  $('#sort-quality').click(function () {
+    clearIdeas();
+    $.getJSON("/api/v1/ideas", function (data) {
+      if (sorterFlag) {
+        data.sort(function (a, b) {
+          return a.quality < b.quality;
+        }).forEach(function (idea) {
+          renderIdeas(idea);
+          sorterFlag = false;
+        });
+      } else {
+        data.sort(function (a, b) {
+          return a.quality > b.quality;
+        }).forEach(function (idea) {
+          renderIdeas(idea);
+          sorterFlag = true;
+        });
+      }
+    });
+  });
+};
+
+var loadIdeas = function loadIdeas(event) {
+  $.getJSON('/api/v1/ideas').then(enumIdeas()).fail(function (data) {
+    alert('Something Went Wrong!');
+  });
+};
+
+var truncate = function truncate(string) {
+  if (string === null) {} else if (string.length > 100) {
+    return $.trim(string).substring(0, 100).split(" ").slice(0, -1).join(" ") + "...";
   } else {
     return string;
   }
-}
-
-var clearIdeas = () => {
-  $('#ideas').children().remove()
 };
-'use strict'
 
-var downgradeQuality = () => {
-  $('#ideas').delegate('#downgrade-quality', 'click', (event) => {
-    let $idea           = $(event.toElement)
-    let qualityUpdateId = $idea.attr('idea-id')
-    let qualityName     = $idea.attr('quality-value')
+var clearIdeas = function clearIdeas() {
+  $('#ideas').children().remove();
+};
+'use strict';
+
+var downgradeQuality = function downgradeQuality() {
+  $('#ideas').delegate('#downgrade-quality', 'click', function (event) {
+    var $idea = $(event.toElement);
+    var qualityUpdateId = $idea.attr('idea-id');
+    var qualityName = $idea.attr('quality-value');
     $.ajax({
       type: 'PATCH',
       url: '/api/v1/ideas/' + qualityUpdateId,
       data: {
-              quality: thumbsDown(
-                qualityArray,
-                qualityName,
-                findIndex(qualityArray, qualityName)
-              )
-            },
-      success: () => {
-        clearIdeas()
-        loadIdeas()
+        quality: thumbsDown(qualityArray, qualityName, findIndex(qualityArray, qualityName))
       },
-      error: () => {
-        clearIdeas()
-        loadIdeas()
-        alert("Something went HORRIBLY wrong!")
-      }
-    })
-  })
-}
-
-var thumbsDown = (qualities, qualityName, qualityIndex) => {
-  let i = qualityIndex
-  if (qualityName === 'Swill') {
-    alert("Cannot downgrade further!")
-  } else {
-    let y = qualityArray[i -= 1]
-    return y
-  }
-}
-;
-'use strict'
-
-var upgradeQuality = () => {
-  $('#ideas').delegate('#upgrade-quality', 'click', (event) => {
-    event.stopPropagation()
-    let $idea           = $(event.toElement)
-    let qualityUpdateId = $idea.attr('idea-id')
-    let qualityName     = $idea.attr('quality-value')
-    $.ajax({
-      type: 'PATCH',
-      url: '/api/v1/ideas/' + qualityUpdateId,
-      data: {
-              quality: thumbsUp(
-                qualityArray,
-                qualityName,
-                findIndex(qualityArray, qualityName)
-              )
-            },
-      success: () => {
-        clearIdeas()
-        loadIdeas()
-        // fetchIdea(qualityUpdateId)
+      success: function success() {
+        clearIdeas();
+        loadIdeas();
       },
-      error: () => {
-        clearIdeas()
-        loadIdeas()
-        alert("Something went HORRIBLY wrong!")
+      error: function error() {
+        clearIdeas();
+        loadIdeas();
+        alert("Something went HORRIBLY wrong!");
       }
-    })
-  })
-}
-
-var qualityArray = ['Swill', 'Plausible', 'Genius']
-
-var thumbsUp = (qualities, qualityName, qualityIndex) => {
-  let i = qualityIndex
-  if (qualityName === 'Genius') {
-    alert("Cannot upgrade further!")
-  } else {
-    let y = qualityArray[i += 1]
-    return y
-  }
-}
-
-var findIndex = (array, findQual) => {
-  let j = 0
-    array.forEach( (quality, index) => {
-      if (findQual === quality) {
-        j = index
-      }
+    });
   });
-  return j
-}
-;
-'use strict'
+};
 
-var filterElements = () => {
-  $(".search-field").keyup(function(event) {
-    var search = $(this).val().toLowerCase()
-    var ideas = $("#ideas").children()
-    ideas.removeClass("hidden")
-    var hide = ideas.filter(function() {
-      let all = $(this).children('.well').text()
-      let searchMore = (all).toLowerCase()
-      return !(searchMore.includes(search))
-    })
-    hide.addClass("hidden")
-  })
-}
-;
+var thumbsDown = function thumbsDown(qualities, qualityName, qualityIndex) {
+  var i = qualityIndex;
+  if (qualityName === 'Swill') {
+    alert("Cannot downgrade further!");
+  } else {
+    var y = qualityArray[i -= 1];
+    return y;
+  }
+};
+'use strict';
+
+var upgradeQuality = function upgradeQuality() {
+  $('#ideas').delegate('#upgrade-quality', 'click', function (event) {
+    event.stopPropagation();
+    var $idea = $(event.toElement);
+    var qualityUpdateId = $idea.attr('idea-id');
+    var qualityName = $idea.attr('quality-value');
+    $.ajax({
+      type: 'PATCH',
+      url: '/api/v1/ideas/' + qualityUpdateId,
+      data: {
+        quality: thumbsUp(qualityArray, qualityName, findIndex(qualityArray, qualityName))
+      },
+      success: function success() {
+        clearIdeas();
+        loadIdeas();
+      },
+      error: function error() {
+        clearIdeas();
+        loadIdeas();
+        alert("Something went HORRIBLY wrong!");
+      }
+    });
+  });
+};
+
+var qualityArray = ['Swill', 'Plausible', 'Genius'];
+
+var thumbsUp = function thumbsUp(qualities, qualityName, qualityIndex) {
+  var i = qualityIndex;
+  if (qualityName === 'Genius') {
+    alert("Cannot upgrade further!");
+  } else {
+    var y = qualityArray[i += 1];
+    return y;
+  }
+};
+
+var findIndex = function findIndex(array, findQual) {
+  var j = 0;
+  array.forEach(function (quality, index) {
+    if (findQual === quality) {
+      j = index;
+    }
+  });
+  return j;
+};
+'use strict';
+
+var filterElements = function filterElements() {
+  $(".search-field").keyup(function (event) {
+    var search = $(this).val().toLowerCase();
+    var ideas = $("#ideas").children();
+    ideas.removeClass("hidden");
+    var hide = ideas.filter(function () {
+      var all = $(this).children('.well').text();
+      var searchMore = all.toLowerCase();
+      return !searchMore.includes(search);
+    });
+    hide.addClass("hidden");
+  });
+};
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
