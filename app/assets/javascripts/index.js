@@ -6,23 +6,24 @@ $(document).ready( () => {
   upgradeQuality()
   downgradeQuality()
   filterElements()
+  editTitle()
+  editBody()
 })
 
 var renderIdeas = (idea) => {
   $('#ideas').prepend(
-    `<div>`
-    + "<h3 class='well' id='title'>"
-    + `Title: ${idea.title}`
-    + `</h3><p class='well' id ='body'>`
-    + `Body: ${truncate(idea.body)}`
+    `<div id='idea'>`
+    + `<h3 contenteditable='true' class='well idea-title' id='title' idea-id='${idea.id}' tile=${idea.title}>`
+    + `${idea.title}`
+    + `</h3><p contenteditable='true' class='well' id='body' idea-id=${idea.id} >`
+    + `${truncate(idea.body)}`
     + `</p>`
     + `<p>`
     + `Quality: ${idea.quality}`
     + `</p>`
-    + `<button type='button' class='btn btn-danger'id='edit-idea' data-id=${idea.id}>Edit</button>`
-    + `<button type='button' class='btn btn-danger'id='delete-idea' data-id=${idea.id}>Delete</button>`
-    + `<button type='button' class='btn btn-danger'id='upgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}>Thumbs Up</button>`
-    + `<button type='button' class='btn btn-danger'id='downgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}>Thumbs Down</button>`
+    + `<button type='button' class='btn btn-warning'id='delete-idea' data-id=${idea.id}><span class="glyphicon glyphicon-trash" aria-hidden="true"></button>`
+    + `<button type='button' class='btn btn-success'id='upgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>`
+    + `<button type='button' class='btn btn-danger'id='downgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></button>`
     + `<hr>`
     + `</div>`
   )
