@@ -3,10 +3,9 @@
 $(document).ready( () => {
   loadIdeas()
   deleteIdea()
+  clearIdeas()
   upgradeQuality()
   downgradeQuality()
-  editTitle()
-  editBody()
   filterElements()
 })
 
@@ -49,9 +48,7 @@ var enumIdeas = () => {
 var loadIdeas = (event) => {
   $.getJSON('/api/v1/ideas')
     .then(enumIdeas())
-  	.fail((data) => {
-      alert('Something Went Wrong!') })
-    .always((data) => { console.log('Something Happened') })
+  	.fail((data) => { alert('Something Went Wrong!') })
 }
 
 var truncate = (string) => {

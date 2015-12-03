@@ -15,11 +15,13 @@ var newIdea = () => {
                 body: ideaBody()
              },
        success: (data) => {
+         console.log("wowowow");
          clearIdeas()
          loadIdeas()
-         clearForm()
+        //  clearForm()
        },
        error: () => {
+         console.log("wowowow");
          alertError()
        }
     })

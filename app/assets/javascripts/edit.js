@@ -1,11 +1,17 @@
+$(document).ready( () => {
+  editTitle()
+  editBody()
+})
+
 var editTitle = () => {
-  $('#ideas').one('click', '#title', () => {
+  $('#ideas').on('click', '#title', () => {
     console.log('editTitle')
     var doIt = event
-    $(this).attr('contenteditable', 'true')
+    $(event.toElement).attr('contenteditable', 'true')
     .focus()
     .keypress( function() {
         if (event.which === 13) {
+          console.log('keypressed');
           updateTitle(doIt)
         }
       })
@@ -13,13 +19,14 @@ var editTitle = () => {
 }
 
 var editBody = () => {
-  $('#ideas').one('click', '#body', () => {
+  $('#ideas').on('click', '#body', () => {
     console.log('editBody')
     var doIt = event
-    $(this).attr('contenteditable', 'true')
+    $(event.toElement).attr('contenteditable', 'true')
     .focus()
     .keypress( function() {
         if (event.which === 13) {
+          console.log('keypressed');
           updateBody(doIt)
         }
       })
@@ -27,6 +34,7 @@ var editBody = () => {
 }
 
 var updateTitle = (event) => {
+  event.preventDefault()
   console.log("wow")
   var $idea = $(event.toElement)
   var $title = $idea.text()
@@ -48,6 +56,7 @@ var updateTitle = (event) => {
 }
 
 var updateBody = (event) => {
+  event.preventDefault()
   console.log("wow")
   var $idea = $(event.toElement)
   var $body = $idea.text()

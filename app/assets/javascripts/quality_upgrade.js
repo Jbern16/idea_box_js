@@ -19,7 +19,6 @@ var upgradeQuality = () => {
       success: () => {
         clearIdeas()
         loadIdeas()
-        // fetchIdea(qualityUpdateId)
       },
       error: () => {
         clearIdeas()

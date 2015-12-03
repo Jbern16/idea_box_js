@@ -20,8 +20,8 @@ var downgradeQuality = () => {
         loadIdeas()
       },
       error: () => {
-        clearIdeas()
-        loadIdeas()
+        // clearIdeas()
+        // loadIdeas()
         alert("Something went HORRIBLY wrong!")
       }
     })
