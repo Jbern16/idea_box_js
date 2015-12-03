@@ -5,9 +5,9 @@ $(document).ready( () => {
   deleteIdea()
   upgradeQuality()
   downgradeQuality()
-  filterElements()
   editTitle()
   editBody()
+  filterElements()
 })
 
 var renderIdeas = (idea) => {
@@ -21,9 +21,9 @@ var renderIdeas = (idea) => {
     + `<p>`
     + `Quality: ${idea.quality}`
     + `</p>`
-    + `<button type='button' class='btn btn-warning'id='delete-idea' data-id=${idea.id}><span class="glyphicon glyphicon-trash" aria-hidden="true"></button>`
-    + `<button type='button' class='btn btn-success'id='upgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>`
-    + `<button type='button' class='btn btn-danger'id='downgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></button>`
+    + `<button type='button' class='btn btn-warning'id='delete-idea' idea-id=${idea.id}>Delete</button>`
+    + `<button type='button' class='btn btn-success'id='upgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" idea-id=${idea.id}></span></button>`
+    + `<button type='button' class='btn btn-danger'id='downgrade-quality' quality-value=${idea.quality} idea-id=${idea.id}><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true" idea-id=${idea.id}><span></button>`
     + `<hr>`
     + `</div>`
   )
@@ -49,7 +49,8 @@ var enumIdeas = () => {
 var loadIdeas = (event) => {
   $.getJSON('/api/v1/ideas')
     .then(enumIdeas())
-  	.fail((data) => { alert('Something Went Wrong!') })
+  	.fail((data) => {
+      alert('Something Went Wrong!') })
     .always((data) => { console.log('Something Happened') })
 }
 

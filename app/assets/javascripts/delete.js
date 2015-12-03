@@ -3,10 +3,13 @@
 var deleteIdea = () => {
   $('#ideas').delegate('#delete-idea', 'click', (event) => {
 
-  let $idea = $(event.toElement)
+    let $idea = $(event.toElement)
+    // if(!$idea.attr('-id')) {
+    //   debugger;
+    // }
     $.ajax({
       type: 'DELETE',
-      url: '/api/v1/ideas/' + $idea.attr('data-id'),
+      url: '/api/v1/ideas/' + $idea.attr('idea-id'),
       success: () => {
         $idea.parent().remove()
       },

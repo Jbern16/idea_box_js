@@ -5,6 +5,12 @@ var upgradeQuality = () => {
     event.stopPropagation()
     let $idea           = $(event.toElement)
     let qualityUpdateId = $idea.attr('idea-id')
+
+    // console.log({qualityUpdateId: qualityUpdateId});
+    // if(!qualityUpdateId || qualityUpdateId==='undefined') {
+    //   debugger;
+    // }
+
     let qualityName     = $idea.attr('quality-value')
     $.ajax({
       type: 'PATCH',
