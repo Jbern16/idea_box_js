@@ -9,5 +9,20 @@ class UserCanSeeRootPageTest < ActiveSupport::TestCase
     visit "/"
 
     assert page.has_content?("Idea Box")
+    assert page.has_content?("Search!")
+  end
+
+  test "it can find the submit button" do
+    visit "/"
+
+    assert page.has_content?("Submit")
+
+    within '#create-ideas' do
+      fill_in 'title', with: 'Nice'
+      fill_in 'body', with: 'Test'
+      click_button 'Submit'
+    end
+    save_and_open_page
+    assert page.has_content?("Submit")
   end
 end

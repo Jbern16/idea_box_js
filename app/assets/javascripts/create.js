@@ -18,7 +18,7 @@ var newIdea = () => {
          console.log("wowowow");
          clearIdeas()
          loadIdeas()
-        //  clearForm()
+         clearForm()
        },
        error: () => {
          console.log("wowowow");

@@ -6,35 +6,8 @@
         1,
         null
       ],
-      "/Users/RJPB/Documents/777/idea_box_js/app/controllers/api/v1/ideas_controller.rb": [
+      "/Users/RJPB/Documents/777/idea_box_js/app/controllers/ideas_controller.rb": [
         1,
-        1,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        2,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        0,
-        null,
-        null,
-        1,
-        null,
-        1,
-        0,
-        null,
         null
       ],
       "/Users/RJPB/Documents/777/idea_box_js/app/controllers/application_controller.rb": [
@@ -48,11 +21,38 @@
         1,
         null
       ],
-      "/Users/RJPB/Documents/777/idea_box_js/app/controllers/ideas_controller.rb": [
-        0,
-        0
+      "/Users/RJPB/Documents/777/idea_box_js/app/controllers/api/v1/ideas_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        2,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        3,
+        null,
+        null
       ]
     },
-    "timestamp": 1449105890
+    "timestamp": 1449123503
   }
 }
