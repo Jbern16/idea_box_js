@@ -7,6 +7,7 @@ $(document).ready( () => {
   upgradeQuality()
   downgradeQuality()
   filterElements()
+  enumQuality()
 })
 
 var renderIdeas = (idea) => {
@@ -36,14 +37,26 @@ var enumIdeas = () => {
   })
 }
 
-// var enumQuality = () => {
-//   $(#quality-sort).on('click')
-//   $.getJSON( "/api/v1/ideas", function( data ) {
-//       data.sort(function(a, b) {return a.quality - b.quality}).forEach( (idea) => {
-//         renderIdeas(idea)
-//     })
-//   })
-// }
+var sorterFlag = true
+
+var enumQuality = () => {
+  $('#sort-quality').click( () => {
+  clearIdeas()
+    $.getJSON( "/api/v1/ideas", function( data ) {
+      if (sorterFlag) {
+        data.sort(function(a, b) {return a.quality < b.quality}).forEach( (idea) => {
+          renderIdeas(idea)
+          sorterFlag = false
+        })
+      } else {
+          data.sort(function(a, b) {return a.quality > b.quality}).forEach( (idea) => {
+          renderIdeas(idea)
+          sorterFlag = true
+        })
+      }
+    })
+  })
+}
 
 var loadIdeas = (event) => {
   $.getJSON('/api/v1/ideas')
@@ -63,4 +76,4 @@ var truncate = (string) => {
 
 var clearIdeas = () => {
   $('#ideas').children().remove()
-};
+}

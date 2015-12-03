@@ -26,7 +26,7 @@ var editBody = () => {
     .focus()
     .keypress( function() {
         if (event.which === 13) {
-          console.log('keypressed');
+          console.log('keypressed')
           updateBody(doIt)
         }
       })
@@ -52,7 +52,7 @@ var updateTitle = (event) => {
         clearIdeas()
         loadIdeas()
       }
-    });
+    })
 }
 
 var updateBody = (event) => {
@@ -74,5 +74,5 @@ var updateBody = (event) => {
         clearIdeas()
         loadIdeas()
       }
-    });
+    })
 }
