@@ -1,0 +1,11 @@
+span.glyphicon {
+    font-size: 25px;
+    margin: 3px;
+    color: red;
+}
+
+.well {
+  background-color: #FFF4AD;
+  margin-left: 100px;
+  margin-right: 100px;
+}
