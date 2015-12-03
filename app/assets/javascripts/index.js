@@ -37,6 +37,15 @@ var enumIdeas = () => {
   })
 }
 
+// var enumQuality = () => {
+//   $(#quality-sort).on('click')
+//   $.getJSON( "/api/v1/ideas", function( data ) {
+//       data.sort(function(a, b) {return a.quality - b.quality}).forEach( (idea) => {
+//         renderIdeas(idea)
+//     })
+//   })
+// }
+
 var loadIdeas = (event) => {
   $.getJSON('/api/v1/ideas')
     .then(enumIdeas())
