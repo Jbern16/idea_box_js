@@ -51,7 +51,6 @@ var updateBody = (event) => {
   console.log("wow")
   var $idea = $(event.toElement)
   var $body = $idea.text()
-  debugger
   $.ajax({
       type: 'PATCH',
       url: '/api/v1/ideas/' + $idea.attr('idea-id'),
