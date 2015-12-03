@@ -22,7 +22,7 @@ class UserCanSeeRootPageTest < ActiveSupport::TestCase
       fill_in 'body', with: 'Test'
       click_button 'Submit'
     end
-    save_and_open_page
+
     assert page.has_content?("Submit")
   end
 end
